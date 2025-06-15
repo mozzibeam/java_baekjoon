@@ -1,40 +1,38 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashSet;
+import java.util.Set;
 
 public class FizzBuzz {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String s1 = br.readLine();
-        String s2 = br.readLine();
-        String s3 = br.readLine();
-        String[] inputs = {s1, s2, s3};
+        int n = Integer.parseInt(br.readLine());
+        String[] sArr = new String[n];
+        for (int i = 0; i < sArr.length; i++) {
+            sArr[i] = br.readLine();
+        }
 
-        for (int i = 0; i < 3; i++) {
-            if (isNumeric(inputs[i])) {
-                int result = Integer.parseInt(inputs[i]) + (3 - i);
-                if (result % 15 == 0) {
-                    System.out.println("FizzBuzz");
-                    break;
-                } else if (result % 3 == 0) {
-                    System.out.println("Fizz");
-                    break;
-                } else if (result % 5 == 0) {
-                    System.out.println("Buzz");
-                    break;
-                } else {
-                    System.out.println(result);
-                    break;
-                }
+        Set<String> set1 = new HashSet<>();
+        for (String s : sArr) {
+            set1.add(s);
+        }
+        System.out.println();
+
+        int length = sArr[0].length();
+        String strTemp = "";
+        for (int i = 0; i < sArr.length; i++) {
+            if (sArr[i].length() < length) {
+                length = sArr[i].length();
+                strTemp = sArr[i];
+                sArr[i] = sArr[0];
+                sArr[0] = strTemp;
             }
         }
-    }
-    public static boolean isNumeric(String str) {
-        try {
-            Integer.parseInt(str);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
+
+
+        for (String s : set1) {
+            System.out.println(s);
         }
     }
 }
